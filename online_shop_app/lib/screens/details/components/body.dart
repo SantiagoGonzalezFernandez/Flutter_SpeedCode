@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:online_shop_app/constants.dart';
 import 'package:online_shop_app/models/Product.dart';
+import 'package:online_shop_app/screens/details/components/description.dart';
+
+import 'add_to_cart.dart';
+import 'color_and_size.dart';
+import 'counter_with_fav_btn.dart';
+import 'product_title_with_image.dart';
 
 class Body extends StatelessWidget {
   final Product product;
@@ -14,6 +20,7 @@ class Body extends StatelessWidget {
     // It provide us total height and width
     Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
       child: Column(
         children: <Widget>[
           SizedBox(
@@ -21,8 +28,13 @@ class Body extends StatelessWidget {
             child: Stack(
               children: <Widget>[
                 Container(
-                  margin: EdgeInsets.only(top: size.height * 0.3),
-                  height: 500,
+                  margin: EdgeInsets.only(top: size.height * 0.3,),
+                  padding: EdgeInsets.only(
+                    top: size.height * 0.12,
+                    left: kDefaultPaddin,
+                    right: kDefaultPaddin
+                  ),
+                  // height: 500,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
@@ -30,56 +42,19 @@ class Body extends StatelessWidget {
                       topRight: Radius.circular(24)
                     )
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
-                        'Aristocratic Hand Bag',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      Text(
-                        product.title,
-                        style: Theme.of(context)
-                              .textTheme
-                              .headline4
-                              .copyWith(
-                                color: Colors.white, fontWeight: FontWeight.bold
-                              ),
-                      ),
-                      Row(
-                        children: <Widget>[
-                          RichText(
-                            text: TextSpan(
-                              children: [
-                                TextSpan(text: 'Price\n'),
-                                TextSpan(
-                                  text: '\$${product.price}',
-                                  style: Theme.of(context)
-                                        .textTheme
-                                        .headline4
-                                        .copyWith(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold
-                                        )
-                                )
-                              ]
-                            )
-                          ),
-                          SizedBox(width: kDefaultPaddin,),
-                          Expanded(
-                            child: Image.asset(
-                              product.image,
-                              fit: BoxFit.fill,
-                            ),
-                          )
-                        ],
-                      )
+                      ColorAndSize(product: product),
+                      SizedBox(height: kDefaultPaddin / 2),
+                      Description(product: product),
+                      SizedBox(height: kDefaultPaddin / 2),
+                      CounterWithFavBtn(),
+                      SizedBox(height: kDefaultPaddin / 2),
+                      AddToCart(product: product)
                     ],
                   ),
-                )
+                ),
+                ProductTitleWithImage(product: product)
               ],
             ),
           )
@@ -88,3 +63,14 @@ class Body extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
