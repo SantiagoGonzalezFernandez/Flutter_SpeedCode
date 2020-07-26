@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:web_app/constants.dart';
 
-import 'components/glass_content.dart';
 import 'components/logo_and_blur_box.dart';
 import 'components/menu.dart';
 import 'components/person_pic.dart';
